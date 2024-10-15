@@ -32,11 +32,15 @@ for (let boton of botones) {
             colaDePisos.unshift(pisoBoton);                       /* inserto el piso del botón pulsado en la posición de más prioridad */
             pisoObjetivo = pisoBoton;                             /* asigno pisoBotón a pisoObjetivo */
           } else if (pisoBoton < pisoObjetivo) {                /* -piso pulsado es más bajo que el pisoObjetivo- */
-            for (let i = 1; i < colaDePisos.length; i++) {        /* recorro la cola de pisos en orden de prioridad saltando el pisoObjetivo */
-              if (colaDePisos[i] > pisoBoton) {                     /* -encuentro un piso con más prioridad que el pulsado- */
-                colaDePisos.splice(i+1, 0, pisoBoton);                /* inserto el piso pulsado justo después */
-                break;                                                /* salgo del bucle */
+            if (colaDePisos.length > 1) {                         /* -cola de pisos tiene más de 1 piso en cola- */
+              for (let i = 0; i < colaDePisos.length; i++) {        /* recorro la cola de pisos en orden de prioridad saltando el pisoObjetivo */
+                if (colaDePisos[i] > pisoBoton) {                     /* -encuentro un piso con más prioridad que el pulsado- */
+                  colaDePisos.splice(i+1, 0, pisoBoton);                /* inserto el piso pulsado justo después */
+                  break;                                                /* salgo del bucle */
+                }
               }
+            } else {                                              /* -cola de pisos tiene 1 solo piso- */
+              colaDePisos.push(pisoBoton);
             }
           }
         } else {                                              /* -piso pulsado está por debajo del ascensor- */
@@ -59,7 +63,7 @@ for (let boton of botones) {
             pisoObjetivo = pisoBoton;                           /* asigno pisoBotón a pisoObjetivo */
           } else {                                            /* -piso pulsado es más bajo que el pisoObjetivo- */
             if (colaDePisos.length > 1) {                       /* -cola de pisos tiene más de 1 piso en cola- */
-              for (let i = 1; i < colaDePisos.length; i++) {      /* recorro la cola de pisos en orden de prioridad saltando el pisoObjetivo */
+              for (let i = 0; i < colaDePisos.length; i++) {      /* recorro la cola de pisos en orden de prioridad saltando el pisoObjetivo */
                 if (colaDePisos[i] > pisoBoton) {                   /* -encuentro un piso con más prioridad que el pulsado- */
                   colaDePisos.splice(i+1, 0, pisoBoton);              /* inserto el piso pulsado justo después */
                   break;                                              /* salgo del bucle */
